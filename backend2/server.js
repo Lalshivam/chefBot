@@ -1,6 +1,7 @@
 const express = require("express");
 const cors = require("cors");
 const dotenv = require("dotenv");
+const path = require("path");
 const { GoogleGenAI } = require("@google/genai");
 
 dotenv.config();
@@ -25,6 +26,9 @@ app.use(
   })
 );
 app.use(express.json({ limit: "1mb" }));
+
+// Serve static files from the built frontend
+app.use(express.static(path.join(__dirname, '../frontend/dist')));
 
 const CHEF_SYSTEM_PROMPT = `You are Chef Gourmet, a warm and practical culinary assistant.
 
@@ -120,6 +124,16 @@ app.post("/chat", async (req, res) => {
       details: error?.message || "Unknown error",
     });
   }
+});
+
+// Handle SPA routing (serve index.html for non-API routes)
+app.get(/.*/, (req, res) => {
+  res.sendFile(path.join(__dirname, '../frontend/dist/index.html'), (err) => {
+    if (err) {
+      console.error('Error serving index.html:', err);
+      res.status(500).send('Server error');
+    }
+  });
 });
 
 app.listen(PORT, () => {

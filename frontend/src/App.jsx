@@ -9,7 +9,7 @@ function App() {
   const textareaRef = useRef(null)
 
   // API URL from environment variable or default to localhost
-  const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:8000'
+  const API_URL = import.meta.env.VITE_API_URL || ''
 
   const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' })
