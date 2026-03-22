@@ -45,6 +45,7 @@ pnpm-debug.log*
 .env.local
 .env.*.local
 
+
 # OS
 Thumbs.db
 .DS_Store
