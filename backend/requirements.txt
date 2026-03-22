@@ -1,0 +1,14 @@
+# Backend dependencies for deployment
+fastapi
+uvicorn[standard]
+pydantic
+safetensors
+huggingface-hub
+
+# ML dependencies
+numpy<2
+transformers==4.40.0
+accelerate
+
+# PyTorch CPU version
+torch==2.2.0
